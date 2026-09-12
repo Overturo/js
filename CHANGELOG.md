@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.3.1] - 2026-09-12
+
+### Changed
+
+- The README links the public documentation and the rendered API reference at overturo.com/developers; the vendored API response corpus is re-recorded against the published document, whose operations now list the SDKs that reach them (`x-overturo-sdks`).
+
 ## [1.3.0] - 2026-09-11
 
 ### Changed
@@ -148,7 +154,7 @@
 | (none) | `client.approvals.open({escalationId, …, onCounter})` for OAP approvals |
 | (none) | `<overturo-decision token="…">` declarative usage |
 
-Full migration guide ships in TS-11 (developer portal).
+Full migration guide ships on the developer portal.
 
 ## [0.1.0] - 2026-03-11
 
