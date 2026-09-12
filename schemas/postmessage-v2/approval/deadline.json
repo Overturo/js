@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.overturo.com/postmessage-v2/approval/deadline.json",
+  "title": "approval DEADLINE payload",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["remaining_seconds", "level", "deadline_at"],
+  "properties": {
+    "remaining_seconds": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "level": {
+      "type": "string",
+      "enum": ["warning", "expired"]
+    },
+    "deadline_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

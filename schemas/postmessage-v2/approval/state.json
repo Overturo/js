@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.overturo.com/postmessage-v2/approval/state.json",
+  "title": "approval STATE payload",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["from", "to", "kind_payload"],
+  "properties": {
+    "from": { "type": ["string", "null"] },
+    "to": {
+      "type": "string",
+      "enum": ["pending", "opened", "in_progress", "approved", "denied", "expired"]
+    },
+    "kind_payload": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["agent_id", "action_class", "scope_invoked"],
+      "properties": {
+        "agent_id": { "type": "string" },
+        "action_class": { "type": "string" },
+        "bounded_authority": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "scope_invoked": { "type": "string" },
+        "value_invoked": {
+          "type": ["object", "null"],
+          "additionalProperties": true
+        }
+      }
+    }
+  }
+}

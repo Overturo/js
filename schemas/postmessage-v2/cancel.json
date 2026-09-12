@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.overturo.com/postmessage-v2/cancel.json",
+  "title": "CANCEL payload (kind-agnostic — bidirectional)",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["reason", "cancelled_by"],
+  "properties": {
+    "reason": {
+      "type": "string",
+      "enum": ["user_declined", "principal_navigated_away", "host_requested", "system_revoked"]
+    },
+    "cancelled_by": {
+      "type": "string",
+      "enum": ["principal", "host", "system"]
+    }
+  }
+}

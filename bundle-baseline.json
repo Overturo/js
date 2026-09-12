@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "capturedAt": "2026-06-10T06:51:06.957Z",
+  "measurements": [
+    {
+      "label": "ESM",
+      "path": "dist/index.js",
+      "rawBytes": 139309,
+      "gzBytes": 21966
+    },
+    {
+      "label": "CJS",
+      "path": "dist/index.cjs",
+      "rawBytes": 141079,
+      "gzBytes": 22475
+    }
+  ]
+}

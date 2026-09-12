@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.overturo.com/postmessage-v2/ready.json",
+  "title": "READY payload (kind-agnostic; branding fields vary per application)",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["kind", "session_token", "deadline_at", "branding", "mode", "locale"],
+  "properties": {
+    "kind": {
+      "type": "string",
+      "enum": ["consent", "approval", "signature_request"]
+    },
+    "session_token": {
+      "type": "string",
+      "minLength": 43,
+      "maxLength": 43
+    },
+    "deadline_at": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "branding": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["application_name"],
+      "properties": {
+        "application_name": { "type": "string" },
+        "logo_url": { "type": ["string", "null"] },
+        "primary_color": { "type": ["string", "null"] }
+      }
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["embed", "popup", "redirect"]
+    },
+    "locale": { "type": "string" }
+  }
+}

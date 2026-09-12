@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.overturo.com/postmessage-v2/signature/complete.json",
+  "title": "signature COMPLETE payload",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["outcome", "completed_at"],
+  "properties": {
+    "outcome": {
+      "type": "string",
+      "enum": ["signed", "declined", "countered"]
+    },
+    "assurance_level": {
+      "type": ["string", "null"],
+      "enum": ["integrity_proof", "advanced", "qualified", null],
+      "description": "The signature assurance level recorded on the agreement."
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

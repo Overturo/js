@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.overturo.com/postmessage-v2/signature/error.json",
+  "title": "signature ERROR payload",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["code", "message", "fatal"],
+  "properties": {
+    "code": { "type": "string" },
+    "message": { "type": "string" },
+    "fatal": { "type": "boolean" },
+    "recoverable_via": {
+      "type": ["string", "null"],
+      "enum": ["reload", "new_session", null]
+    }
+  }
+}

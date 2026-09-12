@@ -1,0 +1,15 @@
+{
+  "sdk": "overturo-js",
+  "endpoints": [
+    { "method": "POST", "path": "/api/v1/consent_sessions" },
+    { "method": "GET", "path": "/api/v1/consent_sessions/{session_token}" },
+    { "method": "POST", "path": "/api/v1/consent_sessions/{session_token}/exchange" },
+    { "method": "POST", "path": "/api/v1/accord_setup_sessions", "unpublished": "internal_name" },
+    { "method": "POST", "path": "/api/v1/preview_tokens" },
+    { "method": "POST", "path": "/api/v1/decisions" },
+    { "method": "GET", "path": "/api/v1/decisions/{session_token}" },
+    { "method": "POST", "path": "/api/v1/decisions/{session_token}/exchange" },
+    { "method": "POST", "path": "/api/v1/decisions/{session_token}/cancel" },
+    { "method": "GET", "path": "/api/v1/decisions/flows/{flow_id}/disclosures" }
+  ]
+}

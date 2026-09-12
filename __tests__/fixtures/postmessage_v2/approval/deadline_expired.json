@@ -1,0 +1,61 @@
+[
+  {
+    "type": "overturo:ready",
+    "kind": "approval",
+    "version": 2,
+    "payload": {
+      "kind": "approval",
+      "session_token": "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG",
+      "deadline_at": "2026-06-05T12:01:00.000Z",
+      "branding": {
+        "application_name": "AgentOps",
+        "logo_url": null,
+        "primary_color": null
+      },
+      "mode": "embed",
+      "locale": "en-US"
+    },
+    "ts": "2026-06-05T12:00:00.000Z",
+    "message_id": "00000000-0000-4000-8000-000000000060"
+  },
+  {
+    "type": "overturo:deadline",
+    "kind": "approval",
+    "version": 2,
+    "payload": {
+      "remaining_seconds": 30,
+      "level": "warning",
+      "deadline_at": "2026-06-05T12:01:00.000Z"
+    },
+    "ts": "2026-06-05T12:00:30.000Z",
+    "message_id": "00000000-0000-4000-8000-000000000061"
+  },
+  {
+    "type": "overturo:deadline",
+    "kind": "approval",
+    "version": 2,
+    "payload": {
+      "remaining_seconds": 0,
+      "level": "expired",
+      "deadline_at": "2026-06-05T12:01:00.000Z"
+    },
+    "ts": "2026-06-05T12:01:00.000Z",
+    "message_id": "00000000-0000-4000-8000-000000000062"
+  },
+  {
+    "type": "overturo:state",
+    "kind": "approval",
+    "version": 2,
+    "payload": {
+      "from": "opened",
+      "to": "expired",
+      "kind_payload": {
+        "agent_id": "agt_gamma",
+        "action_class": "publish_post",
+        "scope_invoked": "social:post"
+      }
+    },
+    "ts": "2026-06-05T12:01:00.100Z",
+    "message_id": "00000000-0000-4000-8000-000000000063"
+  }
+]

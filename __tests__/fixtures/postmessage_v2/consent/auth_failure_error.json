@@ -1,0 +1,34 @@
+[
+  {
+    "type": "overturo:ready",
+    "kind": "consent",
+    "version": 2,
+    "payload": {
+      "kind": "consent",
+      "session_token": "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+      "deadline_at": null,
+      "branding": {
+        "application_name": "Demo Co",
+        "logo_url": null,
+        "primary_color": null
+      },
+      "mode": "embed",
+      "locale": "en-US"
+    },
+    "ts": "2026-06-05T12:00:00.000Z",
+    "message_id": "00000000-0000-4000-8000-000000000030"
+  },
+  {
+    "type": "overturo:error",
+    "kind": "consent",
+    "version": 2,
+    "payload": {
+      "code": "auth_failed",
+      "message": "Authentication popup closed before completion",
+      "fatal": false,
+      "recoverable_via": "new_session"
+    },
+    "ts": "2026-06-05T12:00:15.000Z",
+    "message_id": "00000000-0000-4000-8000-000000000031"
+  }
+]

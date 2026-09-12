@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.overturo.com/postmessage-v2/consent/complete.json",
+  "title": "consent COMPLETE payload",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["outcome", "completed_at"],
+  "properties": {
+    "outcome": {
+      "type": "string",
+      "enum": ["granted", "declined"]
+    },
+    "exchange_token": {
+      "type": ["string", "null"],
+      "description": "Consent token the host exchanges via POST /api/v1/decisions/:token/exchange"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

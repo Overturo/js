@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.overturo.com/postmessage-v2/envelope.json",
+  "title": "TrustSurface postMessage envelope v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["type", "kind", "version", "payload", "ts", "message_id"],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "overturo:ready",
+        "overturo:state",
+        "overturo:complete",
+        "overturo:cancel",
+        "overturo:error",
+        "overturo:resize",
+        "overturo:deadline"
+      ]
+    },
+    "kind": {
+      "type": "string",
+      "enum": ["consent", "approval", "signature_request"]
+    },
+    "version": {
+      "type": "integer",
+      "const": 2
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "ts": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "message_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    }
+  }
+}

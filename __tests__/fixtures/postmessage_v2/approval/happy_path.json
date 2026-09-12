@@ -1,0 +1,67 @@
+[
+  {
+    "type": "overturo:ready",
+    "kind": "approval",
+    "version": 2,
+    "payload": {
+      "kind": "approval",
+      "session_token": "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE",
+      "deadline_at": "2026-06-05T12:05:00.000Z",
+      "branding": {
+        "application_name": "AgentOps",
+        "logo_url": null,
+        "primary_color": "#1f2937"
+      },
+      "mode": "embed",
+      "locale": "en-US"
+    },
+    "ts": "2026-06-05T12:00:00.000Z",
+    "message_id": "00000000-0000-4000-8000-000000000040"
+  },
+  {
+    "type": "overturo:state",
+    "kind": "approval",
+    "version": 2,
+    "payload": {
+      "from": null,
+      "to": "opened",
+      "kind_payload": {
+        "agent_id": "agt_alpha",
+        "action_class": "send_email",
+        "bounded_authority": { "max_per_day": 5, "max_recipients_per_message": 1 },
+        "scope_invoked": "email:send",
+        "value_invoked": { "recipient": "ops@example.com", "subject": "Daily digest" }
+      }
+    },
+    "ts": "2026-06-05T12:00:00.100Z",
+    "message_id": "00000000-0000-4000-8000-000000000041"
+  },
+  {
+    "type": "overturo:state",
+    "kind": "approval",
+    "version": 2,
+    "payload": {
+      "from": "opened",
+      "to": "in_progress",
+      "kind_payload": {
+        "agent_id": "agt_alpha",
+        "action_class": "send_email",
+        "scope_invoked": "email:send"
+      }
+    },
+    "ts": "2026-06-05T12:00:10.000Z",
+    "message_id": "00000000-0000-4000-8000-000000000042"
+  },
+  {
+    "type": "overturo:complete",
+    "kind": "approval",
+    "version": 2,
+    "payload": {
+      "outcome": "approved",
+      "exchange_token": "atx_demo_xyz",
+      "completed_at": "2026-06-05T12:00:20.000Z"
+    },
+    "ts": "2026-06-05T12:00:20.001Z",
+    "message_id": "00000000-0000-4000-8000-000000000043"
+  }
+]

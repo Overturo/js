@@ -1,0 +1,45 @@
+[
+  {
+    "type": "overturo:ready",
+    "kind": "consent",
+    "version": 2,
+    "payload": {
+      "kind": "consent",
+      "session_token": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+      "deadline_at": "2026-12-31T23:59:59.000Z",
+      "branding": {
+        "application_name": "Demo Co",
+        "logo_url": null,
+        "primary_color": null
+      },
+      "mode": "embed",
+      "locale": "en-US"
+    },
+    "ts": "2026-06-05T12:00:00.000Z",
+    "message_id": "00000000-0000-4000-8000-000000000010"
+  },
+  {
+    "type": "overturo:state",
+    "kind": "consent",
+    "version": 2,
+    "payload": {
+      "from": null,
+      "to": "reviewing",
+      "step_index": 0,
+      "total_steps": 3
+    },
+    "ts": "2026-06-05T12:00:00.100Z",
+    "message_id": "00000000-0000-4000-8000-000000000011"
+  },
+  {
+    "type": "overturo:cancel",
+    "kind": "consent",
+    "version": 2,
+    "payload": {
+      "reason": "user_declined",
+      "cancelled_by": "principal"
+    },
+    "ts": "2026-06-05T12:00:05.000Z",
+    "message_id": "00000000-0000-4000-8000-000000000012"
+  }
+]

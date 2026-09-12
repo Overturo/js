@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.overturo.com/postmessage-v2/approval/complete.json",
+  "title": "approval COMPLETE payload",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["outcome", "completed_at"],
+  "properties": {
+    "outcome": {
+      "type": "string",
+      "enum": ["approved", "denied"]
+    },
+    "exchange_token": {
+      "type": ["string", "null"],
+      "description": "Approval-decision exchange token; host calls POST /api/v1/decisions/:token/exchange"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

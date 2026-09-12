@@ -1,0 +1,50 @@
+[
+  {
+    "type": "overturo:ready",
+    "kind": "approval",
+    "version": 2,
+    "payload": {
+      "kind": "approval",
+      "session_token": "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+      "deadline_at": "2026-06-05T12:05:00.000Z",
+      "branding": {
+        "application_name": "AgentOps",
+        "logo_url": null,
+        "primary_color": null
+      },
+      "mode": "embed",
+      "locale": "en-US"
+    },
+    "ts": "2026-06-05T12:00:00.000Z",
+    "message_id": "00000000-0000-4000-8000-000000000050"
+  },
+  {
+    "type": "overturo:state",
+    "kind": "approval",
+    "version": 2,
+    "payload": {
+      "from": null,
+      "to": "opened",
+      "kind_payload": {
+        "agent_id": "agt_beta",
+        "action_class": "transfer_funds",
+        "scope_invoked": "wallet:transfer",
+        "value_invoked": { "amount_usd": 500 }
+      }
+    },
+    "ts": "2026-06-05T12:00:00.100Z",
+    "message_id": "00000000-0000-4000-8000-000000000051"
+  },
+  {
+    "type": "overturo:complete",
+    "kind": "approval",
+    "version": 2,
+    "payload": {
+      "outcome": "denied",
+      "exchange_token": null,
+      "completed_at": "2026-06-05T12:00:15.000Z"
+    },
+    "ts": "2026-06-05T12:00:15.001Z",
+    "message_id": "00000000-0000-4000-8000-000000000052"
+  }
+]

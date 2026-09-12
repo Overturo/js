@@ -1,0 +1,80 @@
+[
+  {
+    "type": "overturo:ready",
+    "kind": "consent",
+    "version": 2,
+    "payload": {
+      "kind": "consent",
+      "session_token": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "deadline_at": "2026-12-31T23:59:59.000Z",
+      "branding": {
+        "application_name": "Demo Co",
+        "logo_url": null,
+        "primary_color": "#3366ff"
+      },
+      "mode": "embed",
+      "locale": "en-US"
+    },
+    "ts": "2026-06-05T12:00:00.000Z",
+    "message_id": "00000000-0000-4000-8000-000000000001"
+  },
+  {
+    "type": "overturo:state",
+    "kind": "consent",
+    "version": 2,
+    "payload": {
+      "from": null,
+      "to": "reviewing",
+      "step_index": 0,
+      "total_steps": 3
+    },
+    "ts": "2026-06-05T12:00:00.100Z",
+    "message_id": "00000000-0000-4000-8000-000000000002"
+  },
+  {
+    "type": "overturo:state",
+    "kind": "consent",
+    "version": 2,
+    "payload": {
+      "from": "reviewing",
+      "to": "permissions",
+      "step_index": 1,
+      "total_steps": 3
+    },
+    "ts": "2026-06-05T12:00:10.000Z",
+    "message_id": "00000000-0000-4000-8000-000000000003"
+  },
+  {
+    "type": "overturo:resize",
+    "kind": "consent",
+    "version": 2,
+    "payload": { "height": 720 },
+    "ts": "2026-06-05T12:00:10.050Z",
+    "message_id": "00000000-0000-4000-8000-000000000004"
+  },
+  {
+    "type": "overturo:state",
+    "kind": "consent",
+    "version": 2,
+    "payload": {
+      "from": "permissions",
+      "to": "confirm",
+      "step_index": 2,
+      "total_steps": 3
+    },
+    "ts": "2026-06-05T12:00:20.000Z",
+    "message_id": "00000000-0000-4000-8000-000000000005"
+  },
+  {
+    "type": "overturo:complete",
+    "kind": "consent",
+    "version": 2,
+    "payload": {
+      "outcome": "granted",
+      "exchange_token": "ctx_demo_abc123",
+      "completed_at": "2026-06-05T12:00:30.000Z"
+    },
+    "ts": "2026-06-05T12:00:30.001Z",
+    "message_id": "00000000-0000-4000-8000-000000000006"
+  }
+]

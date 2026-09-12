@@ -1,0 +1,64 @@
+[
+  {
+    "type": "overturo:ready",
+    "kind": "approval",
+    "version": 2,
+    "payload": {
+      "kind": "approval",
+      "session_token": "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+      "deadline_at": "2026-06-05T12:05:00.000Z",
+      "branding": {
+        "application_name": "AgentOps",
+        "logo_url": null,
+        "primary_color": null
+      },
+      "mode": "embed",
+      "locale": "en-US"
+    },
+    "ts": "2026-06-05T12:00:00.000Z",
+    "message_id": "00000000-0000-4000-8000-000000000070"
+  },
+  {
+    "type": "overturo:state",
+    "kind": "approval",
+    "version": 2,
+    "payload": {
+      "from": null,
+      "to": "opened",
+      "kind_payload": {
+        "agent_id": "agt_delta",
+        "action_class": "transfer_funds",
+        "bounded_authority": { "max_per_day_usd": 100 },
+        "scope_invoked": "wallet:transfer",
+        "value_invoked": { "amount_usd": 500 }
+      }
+    },
+    "ts": "2026-06-05T12:00:00.100Z",
+    "message_id": "00000000-0000-4000-8000-000000000071"
+  },
+  {
+    "type": "overturo:error",
+    "kind": "approval",
+    "version": 2,
+    "payload": {
+      "code": "bounded_authority_violation",
+      "message": "value_invoked.amount_usd (500) exceeds bounded_authority.max_per_day_usd (100)",
+      "fatal": true,
+      "recoverable_via": null
+    },
+    "ts": "2026-06-05T12:00:00.150Z",
+    "message_id": "00000000-0000-4000-8000-000000000072"
+  },
+  {
+    "type": "overturo:complete",
+    "kind": "approval",
+    "version": 2,
+    "payload": {
+      "outcome": "denied",
+      "exchange_token": null,
+      "completed_at": "2026-06-05T12:00:00.200Z"
+    },
+    "ts": "2026-06-05T12:00:00.201Z",
+    "message_id": "00000000-0000-4000-8000-000000000073"
+  }
+]
