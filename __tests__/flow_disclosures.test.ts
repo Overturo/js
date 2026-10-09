@@ -59,7 +59,7 @@ describe("decisions.discover (189)", () => {
     // Enum VALUES pass through unchanged (data, not keys).
     const purpose = result.purposes.find((p) => p.name === "care_reminders")
     expect(purpose?.mechanism).toBe("opt_out")
-    expect(purpose?.legalBasis).toBe("consent")
+    expect(purpose?.legalBasis).toBe("legitimate_interest")
     expect(Array.isArray(purpose?.dataLabels)).toBe(true)
     // fields carry the public completed_by vocabulary, camelCased key.
     expect(result.fields.map((f) => f.completedBy)).toContain("principal")
