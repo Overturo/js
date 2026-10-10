@@ -2,7 +2,7 @@ import { ApiClient, extractErrorMessage, toCamelCase } from "./api"
 import { ApprovalsFacade } from "./approvals_facade"
 import { ConsentFacade } from "./consent_facade"
 import { SigningFacade } from "./signing_facade"
-import { API_PATH, DEFAULT_BASE_URL, PREVIEW_TOKENS_PATH, SETUP_API_PATH } from "./constants"
+import { API_PATH, DEFAULT_BASE_URL, MEETING_CONSENTS_API_PATH, PREVIEW_TOKENS_PATH, SETUP_API_PATH } from "./constants"
 import { Decisions } from "./decisions"
 import { createEmbed } from "./embed"
 import { OverturoApiError, OverturoValidationError } from "./errors"
@@ -32,6 +32,7 @@ import type {
   SetupHandle,
   SetupPopupHandle,
   SetupSession,
+  MeetingParticipantStatus,
 } from "./types"
 
 /**
@@ -159,6 +160,50 @@ export class Overturo {
    */
   async getSession(sessionToken: string): Promise<SessionStatus> {
     return this.api.get<SessionStatus>(`${API_PATH}/${sessionToken}`)
+  }
+
+  /**
+   * This participant's consent status for ONE meeting (the meeting's own
+   * window and platform ride along). Identified by the participant's own
+   * session token — never lists other participants.
+   */
+  async getMeetingParticipantStatus(meetingId: string, sessionToken: string): Promise<MeetingParticipantStatus> {
+    if (!meetingId) throw new OverturoValidationError("meetingId is required")
+    if (!sessionToken) throw new OverturoValidationError("sessionToken is required")
+    const response = await this.api.rawGet(
+      `${MEETING_CONSENTS_API_PATH}/${encodeURIComponent(meetingId)}/status?session_token=${encodeURIComponent(sessionToken)}`
+    )
+    return this.decodeParticipantStatus(response)
+  }
+
+  /**
+   * Withdraws this participant's consent for ONE meeting. The host is told;
+   * the record keeps the withdrawal.
+   */
+  async withdrawMeetingConsent(meetingId: string, sessionToken: string): Promise<MeetingParticipantStatus> {
+    if (!meetingId) throw new OverturoValidationError("meetingId is required")
+    if (!sessionToken) throw new OverturoValidationError("sessionToken is required")
+    const response = await this.api.rawPost(`${MEETING_CONSENTS_API_PATH}/${encodeURIComponent(meetingId)}/revoke`, {
+      sessionToken,
+    })
+    return this.decodeParticipantStatus(response)
+  }
+
+  // Purpose names are data, not keys: everything camelCases except `purposes`.
+  private async decodeParticipantStatus(response: Response): Promise<MeetingParticipantStatus> {
+    if (!response.ok) {
+      let responseBody: unknown
+      try {
+        responseBody = await response.json()
+      } catch {
+        responseBody = null
+      }
+      throw new OverturoApiError(extractErrorMessage(responseBody, response.status), response.status, responseBody)
+    }
+    const raw = JSON.parse(await response.text()) as Record<string, unknown>
+    const purposes = (raw.purposes ?? {}) as Record<string, string>
+    const decoded = toCamelCase({ ...raw, purposes: {} }) as MeetingParticipantStatus
+    return { ...decoded, purposes: { ...purposes } }
   }
 
   /**

@@ -123,10 +123,23 @@ export class ApiClient {
   }
 
   /**
+   * GET that returns the raw Response object without JSON parsing, case
+   * conversion or error throwing. Used where part of the body must stay
+   * verbatim (keys that are data, such as purpose names).
+   */
+  async rawGet(path: string): Promise<Response> {
+    return this.rawRequest("GET", path)
+  }
+
+  /**
    * POST that returns the raw Response object without JSON parsing or error throwing.
    * Used by exchange() to handle HTTP 202 (fulfillment pending) with retry logic.
    */
   async rawPost(path: string, body: Record<string, unknown>): Promise<Response> {
+    return this.rawRequest("POST", path, body)
+  }
+
+  private async rawRequest(method: "GET" | "POST", path: string, body?: Record<string, unknown>): Promise<Response> {
     const url = `${this.baseUrl}${path}`
     const headers: Record<string, string> = {
       "Content-Type": "application/json",
@@ -146,9 +159,9 @@ export class ApiClient {
 
     try {
       return await fetch(url, {
-        method: "POST",
+        method,
         headers,
-        body: JSON.stringify(toSnakeCase(body)),
+        body: body === undefined ? undefined : JSON.stringify(toSnakeCase(body)),
         signal: controller.signal,
       })
     } catch (error) {

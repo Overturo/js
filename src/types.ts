@@ -730,6 +730,27 @@ export interface FlowDisclosures {
   revision: string
 }
 
+/**
+ * A participant's own view of one meeting (camelCase after the ApiClient's
+ * toCamelCase pass). `purposes` maps purpose name → the recorded decision
+ * value; `meeting` names the meeting the decision is pinned to.
+ */
+export interface MeetingParticipantStatus {
+  meetingConsentId: string
+  status: "pending" | "fulfilled" | "expired" | "revoked" | string
+  consentedAt: string | null
+  revokedAt: string | null
+  purposes: Record<string, string>
+  meeting: {
+    id: string
+    title: string | null
+    scheduledAt: string | null
+    endsAt: string | null
+    platform: string | null
+    cancelledAt: string | null
+  } | null
+}
+
 /** Options for `consent.open` (preserves v0 callback names). */
 export interface ConsentOpenOptions {
   flowId: string

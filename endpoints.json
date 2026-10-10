@@ -10,6 +10,8 @@
     { "method": "GET", "path": "/api/v1/decisions/{session_token}" },
     { "method": "POST", "path": "/api/v1/decisions/{session_token}/exchange" },
     { "method": "POST", "path": "/api/v1/decisions/{session_token}/cancel" },
-    { "method": "GET", "path": "/api/v1/decisions/flows/{flow_id}/disclosures" }
+    { "method": "GET", "path": "/api/v1/decisions/flows/{flow_id}/disclosures" },
+    { "method": "GET", "path": "/api/v1/meeting_consents/{id}/status" },
+    { "method": "POST", "path": "/api/v1/meeting_consents/{id}/revoke" }
   ]
 }

@@ -1,5 +1,5 @@
 > **Release mirror.** This repository is a read-only snapshot of
-> `@overturo/js` 1.3.2, published from Overturo's main
+> `@overturo/js` 1.4.0, published from Overturo's main
 > development repository. Issues and pull requests are welcome here; accepted
 > changes are ported upstream and appear in the next release snapshot.
 > Security reports: see [SECURITY.md](./SECURITY.md).

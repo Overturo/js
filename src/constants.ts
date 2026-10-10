@@ -79,6 +79,9 @@ export const DECISIONS_API_PATH = "/api/v1/decisions"
  */
 export const DECISIONS_FLOW_PATH = "/decisions"
 
+/** The participant's own meeting pair (status / withdrawal) — publishable key + session token. */
+export const MEETING_CONSENTS_API_PATH = "/api/v1/meeting_consents"
+
 /** API path for accord setup sessions. */
 export const SETUP_API_PATH = "/api/v1/accord_setup_sessions"
 

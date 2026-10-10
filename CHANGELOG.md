@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.4.0] - 2026-10-10
+
+### Added
+
+- `getMeetingParticipantStatus(meetingId, sessionToken)` and `withdrawMeetingConsent(meetingId, sessionToken)` — a participant's own view of one meeting (status, decisions per purpose, the meeting's window and platform) and their withdrawal, identified by their session token. Purpose names stay verbatim (they are data, not keys). Tests decode the recorded exchanges.
+
 ## [1.3.2] - 2026-10-09
 
 ### Changed

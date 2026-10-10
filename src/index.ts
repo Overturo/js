@@ -43,6 +43,7 @@ export type {
   DecisionsHandle,
   DecisionsNamespace,
   FlowDisclosures,
+  MeetingParticipantStatus,
   FlowDisclosurePurpose,
   FlowDisclosureField,
   FlowDisclosureStep,
