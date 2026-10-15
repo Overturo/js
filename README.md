@@ -1,5 +1,5 @@
 > **Release mirror.** This repository is a read-only snapshot of
-> `@overturo/js` 1.4.0, published from Overturo's main
+> `@overturo/js` 1.5.0, published from Overturo's main
 > development repository. Issues and pull requests are welcome here; accepted
 > changes are ported upstream and appear in the next release snapshot.
 > Security reports: see [SECURITY.md](./SECURITY.md).
@@ -210,6 +210,20 @@ const result = await overturo.exchange({
 // result.claims, result.attestations, result.credentials
 // result.accessToken, result.idToken (if OAuth configured)
 ```
+
+## The embedded consent field (`@overturo/js/field`)
+
+A separate, explicitly loaded entry (`import "@overturo/js/field"` or `<script src="https://overturo.com/sdk/v1/overturo-field.js">`) registers `<overturo-consent-field>`: an Overturo-rendered consent control placed inside your own form. Attach it with the core facade:
+
+```js
+import { Overturo } from "@overturo/js"
+import "@overturo/js/field"
+
+const overturo = new Overturo({ publishableKey: "pk_live_…" })
+overturo.forms.attach({ flowId: "flw_…", form: "#signup", field: "overturo-consent-field", subjectField: "#email" })
+```
+
+The element is form-associated (its `value` is the capture token once captured), emits `field:ready`, `field:state`, `field:complete` and `field:error` events, takes `flow`, `purposes`, `locale`, `theme` and `appearance` attributes, and never loads a font or fetches anything of its own. One field per flow per form.
 
 ## Style Overrides
 

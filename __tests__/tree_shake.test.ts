@@ -51,6 +51,34 @@ async function bundleConsumer(source: string): Promise<BundleResult> {
 }
 
 describe("tree-shaking", () => {
+  it("the core entry carries no embedded-consent-field protocol code (202 D13)", async () => {
+    const result = await bundleConsumer(
+      `import { Overturo } from "@overturo/js";
+       export default Overturo;`
+    )
+    expect(result.output).not.toContain("overturo-field:")
+    expect(result.output).not.toContain("field-v1")
+  })
+
+  it("the field entry carries neither the snapshot sanitiser nor the decision element (202 D13)", async () => {
+    const result = await bundleConsumer(
+      `import { ConsentFieldElement } from "${resolve(SDK_ROOT, "src/field/index.ts")}";
+       export default ConsentFieldElement;`
+    )
+    expect(result.output).toContain("overturo-field:")
+    expect(result.output).not.toContain("sanitisedSnapshot")
+    expect(result.output).not.toContain("overturo-decision")
+  })
+
+  it("importing the custom element does NOT pull in the forms facade (201)", async () => {
+    const result = await bundleConsumer(
+      `import { DecisionElement } from "@overturo/js";
+       export default DecisionElement;`
+    )
+    expect(result.output).not.toContain("sanitisedSnapshot")
+    expect(result.output).not.toContain("overturo_capture_token")
+  })
+
   it("importing the custom element does NOT pull in AccordSetup", async () => {
     const result = await bundleConsumer(
       `import { DecisionElement } from "@overturo/js";

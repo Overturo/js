@@ -8,7 +8,7 @@
 //
 
 import type { ApiClient } from "./api"
-import { DECISIONS_API_PATH, DECISIONS_FLOW_PATH, EMBED_DEFAULTS, MESSAGE_TYPES_V2, POPUP_DEFAULTS } from "./constants"
+import { DECISIONS_API_PATH, DECISIONS_FLOW_PATH, EMBED_DEFAULTS, MESSAGE_TYPES_V2, POPUP_DEFAULTS, isForeignEnvelope } from "./constants"
 import { applyStyle, resolveContainer } from "./dom"
 import { OverturoApiError, OverturoError, OverturoValidationError } from "./errors"
 import { validate, type Envelope } from "./postmessage_v2"
@@ -220,7 +220,7 @@ export class Decisions implements DecisionsNamespace {
 
     const ac = new AbortController()
     const onMessage = (event: MessageEvent): void => {
-      if (event.origin !== expectedOrigin) return
+      if (event.origin !== expectedOrigin || isForeignEnvelope(event.data)) return
       const result = validate(event.data)
       if (!result.valid) {
         opts.onError?.({
@@ -299,7 +299,7 @@ export class Decisions implements DecisionsNamespace {
 
     const ac = new AbortController()
     const onMessage = (event: MessageEvent): void => {
-      if (event.origin !== expectedOrigin) return
+      if (event.origin !== expectedOrigin || isForeignEnvelope(event.data)) return
       const result = validate(event.data)
       if (!result.valid) {
         opts.onError?.({ code: "protocol_violation" } as DecisionPayload)

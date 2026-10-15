@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.overturo.com/field-v1/reset.json",
+  "title": "RESET payload (host \u2192 frame)",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {}
+}

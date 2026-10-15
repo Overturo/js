@@ -57,7 +57,11 @@ export type {
   SigningOpenOptions,
   SigningNamespace,
   SignatureStatePayload,
+  // 201 — form capture
+  FormCaptureOptions,
+  FormCaptureResult,
 } from "./types"
+export type { AttestedDecision } from "./forms/presentation"
 export { createSetupEmbed, createSetupPopup, setupRedirect } from "./setup"
 export {
   OverturoApiError,

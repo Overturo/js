@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.overturo.com/field-v1/submit_requested.json",
+  "title": "SUBMIT_REQUESTED payload (the person pressed Enter inside the frame)",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {}
+}

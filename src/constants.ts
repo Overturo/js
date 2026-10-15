@@ -96,5 +96,17 @@ export const PREVIEW_TOKENS_PATH = "/api/v1/preview_tokens"
 /** Default base URL. */
 export const DEFAULT_BASE_URL = "https://overturo.com"
 
+/** The v2 family's type prefix; an envelope of another family on the same page is not ours to validate. */
+export const MESSAGE_PREFIX_V2 = "overturo:"
+
+/** True for a message whose `type` names another protocol family (dropped silently, never a protocol violation). */
+export function isForeignEnvelope(data: unknown): boolean {
+  const type = (data as { type?: unknown } | null)?.type
+  return typeof type === "string" && !type.startsWith(MESSAGE_PREFIX_V2)
+}
+
 /** Default request timeout in milliseconds (30 seconds). */
 export const DEFAULT_TIMEOUT = 30_000
+
+/** 202 — the embedded consent field element (registered by the separate `@overturo/js/field` entry). */
+export const CONSENT_FIELD_ELEMENT_NAME = "overturo-consent-field"

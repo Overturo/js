@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.overturo.com/field-v1/resize.json",
+  "title": "RESIZE payload",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "height"
+  ],
+  "properties": {
+    "height": {
+      "type": "integer",
+      "minimum": 0
+    }
+  }
+}

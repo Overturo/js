@@ -14,8 +14,11 @@
 // Methodology:
 //   - minifier: tsup's default esbuild (already runs at build time)
 //   - compression: zlib.gzipSync(buf, {level: 9})
-//   - what's counted: dist/index.js (ESM) and dist/index.cjs (CJS)
-//   - what's NOT counted: .d.ts declarations, source maps
+//   - what's counted: dist/index.js (ESM) and dist/index.cjs (CJS) against the
+//     core budget; dist/field/index.{js,cjs} (202, the embedded consent field
+//     entry) against its own budget — the core never grows for a control only
+//     some integrators use.
+//   - what's NOT counted: .d.ts declarations, source maps, the IIFE builds
 //
 
 import { readFileSync, writeFileSync, existsSync } from "node:fs"
@@ -23,10 +26,20 @@ import { gzipSync } from "node:zlib"
 import { resolve } from "node:path"
 
 const ROOT = resolve(import.meta.dirname, "..")
-const BUDGET_BYTES = 25 * 1024
+// 201 — the form-capture facade (overturo.forms, ~1.6 KB gzipped) took the
+// bundle past the 25 KB line it had grown to by 189/200; the budget moves to
+// 28 KB with the baseline re-measured (the delta is named in the 201 delivery report).
+// 202 review: the facade's field handoff and the foreign-family guard on the v2
+// listeners put the CJS build 6 bytes under 28 KB — a toolchain-sensitive margin —
+// so the budget moves to 29 KB (the delta is named in the 202 delivery report).
+const CORE_BUDGET_BYTES = 29 * 1024
+// 202 D13 — the field entry (element + field-v1 validators) has its own line.
+const FIELD_BUDGET_BYTES = 10 * 1024
 const BUNDLES = [
-  { path: "dist/index.js", label: "ESM" },
-  { path: "dist/index.cjs", label: "CJS" },
+  { path: "dist/index.js", label: "ESM", budgetBytes: CORE_BUDGET_BYTES },
+  { path: "dist/index.cjs", label: "CJS", budgetBytes: CORE_BUDGET_BYTES },
+  { path: "dist/field/index.js", label: "FIELD-ESM", budgetBytes: FIELD_BUDGET_BYTES },
+  { path: "dist/field/index.cjs", label: "FIELD-CJS", budgetBytes: FIELD_BUDGET_BYTES },
 ]
 const BASELINE_FILE = resolve(ROOT, "bundle-baseline.json")
 
@@ -36,7 +49,7 @@ const checkAgainstBaseline = args.has("--check")
 const jsonOutput = process.env.JSON_OUTPUT === "1"
 
 const measurements = []
-for (const { path, label } of BUNDLES) {
+for (const { path, label, budgetBytes } of BUNDLES) {
   let raw
   try {
     raw = readFileSync(resolve(ROOT, path))
@@ -51,7 +64,7 @@ for (const { path, label } of BUNDLES) {
     path,
     rawBytes: raw.length,
     gzBytes: gz.length,
-    budgetBytes: BUDGET_BYTES,
+    budgetBytes,
   })
 }
 
@@ -95,7 +108,7 @@ const enriched = measurements.map((m) => {
     ...m,
     baselineGzBytes: base?.gzBytes ?? null,
     deltaBytes: base ? m.gzBytes - base.gzBytes : null,
-    budgetStatus: m.gzBytes <= BUDGET_BYTES ? "PASS" : "FAIL",
+    budgetStatus: m.gzBytes <= m.budgetBytes ? "PASS" : "FAIL",
   }
 })
 
@@ -107,9 +120,9 @@ for (const m of enriched) {
   const baseTxt =
     m.baselineGzBytes != null ? ` base=${m.baselineGzBytes}B Δ=${signed(m.deltaBytes)}B` : " (no baseline)"
   sink(
-    `${m.label.padEnd(4)} ${m.path.padEnd(20)} ` +
+    `${m.label.padEnd(9)} ${m.path.padEnd(20)} ` +
       `raw=${m.rawBytes.toString().padStart(7)}B ` +
-      `gz=${m.gzBytes.toString().padStart(6)}B ${m.budgetStatus}` +
+      `gz=${m.gzBytes.toString().padStart(6)}B/${m.budgetBytes}B ${m.budgetStatus}` +
       baseTxt
   )
 }
@@ -123,7 +136,8 @@ if (jsonOutput) {
   process.stdout.write(
     `${JSON.stringify(
       {
-        budgetBytes: BUDGET_BYTES,
+        budgetBytes: CORE_BUDGET_BYTES,
+        fieldBudgetBytes: FIELD_BUDGET_BYTES,
         measurements: enriched,
       },
       null,
@@ -132,9 +146,11 @@ if (jsonOutput) {
   )
 }
 
-const exceeded = enriched.some((m) => m.gzBytes > BUDGET_BYTES)
-if (exceeded) {
-  console.error("\nOne or more bundles exceed the 25 KB minified+gzipped budget.")
+const exceeded = enriched.filter((m) => m.gzBytes > m.budgetBytes)
+if (exceeded.length) {
+  for (const m of exceeded) {
+    console.error(`\n${m.label} exceeds its minified+gzipped budget: ${m.gzBytes}B > ${m.budgetBytes}B.`)
+  }
   process.exit(1)
 }
 

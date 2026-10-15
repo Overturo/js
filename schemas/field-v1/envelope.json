@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.overturo.com/field-v1/envelope.json",
+  "title": "Embedded consent field envelope v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "version",
+    "payload",
+    "ts",
+    "message_id"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "overturo-field:ready",
+        "overturo-field:state",
+        "overturo-field:resize",
+        "overturo-field:complete",
+        "overturo-field:error",
+        "overturo-field:submit_requested",
+        "overturo-field:init",
+        "overturo-field:capture",
+        "overturo-field:reset"
+      ]
+    },
+    "version": {
+      "type": "integer",
+      "const": 1
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "ts": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[+-]\\d{2}:\\d{2})$"
+    },
+    "message_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    }
+  }
+}

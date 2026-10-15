@@ -1,7 +1,7 @@
 {
   "name": "@overturo/js",
-  "version": "1.4.0",
-  "description": "JavaScript SDK for Overturo decisions — consent, approval, signing, and trust-surface flows",
+  "version": "1.5.0",
+  "description": "JavaScript SDK for Overturo decisions \u2014 consent, approval, signing, and trust-surface flows",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -15,6 +15,16 @@
       "require": {
         "types": "./dist/index.d.cts",
         "default": "./dist/index.cjs"
+      }
+    },
+    "./field": {
+      "import": {
+        "types": "./dist/field/index.d.ts",
+        "default": "./dist/field/index.js"
+      },
+      "require": {
+        "types": "./dist/field/index.d.cts",
+        "default": "./dist/field/index.cjs"
       }
     }
   },
@@ -36,7 +46,7 @@
     "jsdom": "^24.0.0",
     "tsup": "^8.0.0",
     "typescript": "^5.4.0",
-    "vitest": "^4.1.0"
+    "vitest": "^4.1.11"
   },
   "keywords": [
     "consent",
@@ -60,7 +70,8 @@
   "sideEffects": [
     "./dist/index.js",
     "./dist/index.cjs",
-    "./dist/elements/**"
+    "./dist/elements/**",
+    "./dist/field/**"
   ],
   "overrides": {
     "esbuild": "^0.28.1"

@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.overturo.com/field-v1/ready.json",
+  "title": "READY payload (an announcement; carries nothing)",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {}
+}

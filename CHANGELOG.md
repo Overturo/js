@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.5.0] - 2026-10-15
+
+### Added
+
+- `overturo.forms.attach({ flowId, form, map, subjectField, … })` — form capture: the organisation keeps its own form, Overturo keeps the record. On submit the facade reads the mapped consent controls (what the person first saw counts, including a control ticked by script at load), posts the capture with the publishable key, places the capture token in a hidden input (`overturo_capture_token` by default) for your server to commit, and calls `onCaptured`. `wording` writes the published wording into your labels; `labels` digests the text the person read so the record says whether it matched. `buildCaptureBody` is exposed for integrators who post themselves. Returns a detach function.
+- `@overturo/js/field` — a separately loaded entry registering `<overturo-consent-field>`: a form-associated, Overturo-rendered consent control (`flow`, `purposes`, `locale`, `theme`, `appearance` attributes; `field:ready`, `field:state`, `field:complete`, `field:error` events) that loads no font and fetches nothing of its own. Pass it as `field` to `forms.attach`; one field per flow per form. Its message schemas live under `schemas/field-v1/`.
+
+### Changed
+
+- Bundle baseline: the core entry is about 28 KB gzipped; the field entry about 9 KB gzipped. Vendored corpus refreshed to the shared corpus 1.0.5. Dev dependency: vitest 4.1.11.
+
 ## [1.4.0] - 2026-10-10
 
 ### Added

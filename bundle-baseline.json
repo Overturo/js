@@ -1,18 +1,30 @@
 {
   "version": 1,
-  "capturedAt": "2026-06-10T06:51:06.957Z",
+  "capturedAt": "2026-10-13T05:15:56.305Z",
   "measurements": [
     {
       "label": "ESM",
       "path": "dist/index.js",
-      "rawBytes": 139309,
-      "gzBytes": 21966
+      "rawBytes": 183109,
+      "gzBytes": 28233
     },
     {
       "label": "CJS",
       "path": "dist/index.cjs",
-      "rawBytes": 141079,
-      "gzBytes": 22475
+      "rawBytes": 184879,
+      "gzBytes": 28730
+    },
+    {
+      "label": "FIELD-ESM",
+      "path": "dist/field/index.js",
+      "rawBytes": 49911,
+      "gzBytes": 9179
+    },
+    {
+      "label": "FIELD-CJS",
+      "path": "dist/field/index.cjs",
+      "rawBytes": 51613,
+      "gzBytes": 9647
     }
   ]
 }

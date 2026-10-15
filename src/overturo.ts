@@ -1,6 +1,7 @@
 import { ApiClient, extractErrorMessage, toCamelCase } from "./api"
 import { ApprovalsFacade } from "./approvals_facade"
 import { ConsentFacade } from "./consent_facade"
+import { FormsFacade } from "./forms"
 import { SigningFacade } from "./signing_facade"
 import { API_PATH, DEFAULT_BASE_URL, MEETING_CONSENTS_API_PATH, PREVIEW_TOKENS_PATH, SETUP_API_PATH } from "./constants"
 import { Decisions } from "./decisions"
@@ -71,6 +72,8 @@ export class Overturo {
   readonly consent: ConsentFacade
   readonly approvals: ApprovalsFacade
   readonly signing: SigningFacade
+  /** 201 — Form Capture: the organisation keeps its form; Overturo keeps the record. */
+  readonly forms: FormsFacade
 
   constructor(options: OverturoOptions) {
     if (!options.publishableKey) {
@@ -96,6 +99,7 @@ export class Overturo {
     this.consent = new ConsentFacade(this.decisions)
     this.approvals = new ApprovalsFacade(this.decisions, this.api)
     this.signing = new SigningFacade(this.decisions, this.api)
+    this.forms = new FormsFacade(this.api, this.decisions, this.flowBaseUrl, options.publishableKey)
 
     if (this.debugFlag && typeof window !== "undefined") {
       const url = new URL(this.baseUrl)

@@ -9,7 +9,7 @@
 // Plan: Phase D.
 
 import { validate, type Envelope } from "../postmessage_v2"
-import { MESSAGE_TYPES_V2 } from "../constants"
+import { MESSAGE_TYPES_V2, isForeignEnvelope } from "../constants"
 import type { DecisionMode } from "../types"
 
 export const ELEMENT_NAME = "overturo-decision"
@@ -123,7 +123,7 @@ export class DecisionElement extends HTMLElement {
 
     this.#ac = new AbortController()
     const onMessage = (event: MessageEvent): void => {
-      if (event.origin !== expectedOrigin) return
+      if (event.origin !== expectedOrigin || isForeignEnvelope(event.data)) return
       const result = validate(event.data)
       if (!result.valid) {
         this.#emitError({ code: "protocol_violation" })

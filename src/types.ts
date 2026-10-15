@@ -504,7 +504,57 @@ export interface PreviewHandle {
 // ─────────────────────────────────────────────────────────────────────
 
 /** Delivery mode for a decision. */
-export type DecisionMode = "embed" | "popup" | "redirect"
+/** `capture` (201) types a session the one-call form capture minted; it is never passed to createSession. */
+export type DecisionMode = "embed" | "popup" | "redirect" | "capture"
+
+// ── 201 — Form Capture (the organisation keeps its form; Overturo keeps the record) ──
+
+export interface FormCaptureOptions {
+  /** The flow whose purposes the form answers. */
+  flowId: string
+  /** The form element or a selector resolving to it. */
+  form: HTMLFormElement | string
+  /** purpose key → CSS selector of the consent control (a checkbox or radio). Required unless `field` is given. */
+  map?: Record<string, string>
+  /**
+   * 202 — the `<overturo-consent-field>` element (or a selector resolving to it) inside the form.
+   * The control is Overturo-rendered: presentation is observed by the platform and the receipt
+   * says so. Needs the field entry (`@overturo/js/field` / `overturo-field.js`) loaded first.
+   */
+  field?: HTMLElement | string
+  /** CSS selector of the input that holds the person's email address. */
+  subjectField: string
+  /** CSS selector of an input holding your own identifier for the person. */
+  externalIdField?: string
+  /** purpose key → selector whose text is replaced by the published wording (the discovery read). */
+  wording?: Record<string, string>
+  /**
+   * purpose key → selector of the label the person read. Its text is digested
+   * (the published algorithm, over the trimmed text) and attested with the capture, so the record
+   * says whether your wording matched the published wording. Defaults to `wording`.
+   */
+  labels?: Record<string, string>
+  /** Browser commit — honoured only when the application enabled it and lists allowed origins. */
+  commit?: boolean
+  /** Locale for the published wording. */
+  locale?: string
+  /** Name of the hidden input that carries the capture token to your server (default overturo_capture_token). */
+  tokenFieldName?: string
+  /** Set false to stop the form from submitting after the capture (you call requestSubmit yourself). */
+  submitAfterCapture?: boolean
+  onCaptured?: (result: FormCaptureResult) => void
+  onError?: (error: Error) => void
+}
+
+export interface FormCaptureResult {
+  /** The capture token — hand it to your server with the submission and commit it. */
+  token: DecisionToken
+  attestationId: string
+  /** True only for a browser commit. */
+  committed: boolean
+  wordingVerdict: string | null
+  recordId: string | null
+}
 
 /**
  * Nominal-typed decision token. Server-issued, opaque. The brand

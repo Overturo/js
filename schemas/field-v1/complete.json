@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.overturo.com/field-v1/complete.json",
+  "title": "COMPLETE payload (the capture token)",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "token",
+    "committed"
+  ],
+  "properties": {
+    "token": {
+      "type": "string",
+      "minLength": 1
+    },
+    "committed": {
+      "type": "boolean"
+    },
+    "record_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.overturo.com/field-v1/init.json",
+  "title": "INIT payload (host \u2192 frame; the origin handshake)",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "locale": {
+      "type": "string"
+    }
+  }
+}

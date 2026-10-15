@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.overturo.com/field-v1/capture.json",
+  "title": "CAPTURE payload (host \u2192 frame; what only the host knows)",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "subject": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "external_id": {
+          "type": "string"
+        }
+      }
+    },
+    "page_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "form_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "submitter": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "commit": {
+      "type": "boolean"
+    }
+  }
+}
