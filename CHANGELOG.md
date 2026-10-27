@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.5.1] - 2026-10-26
+### Changed
+- The build runs under npm (`yarn.lock` removed); the public repository carries its own release workflow and publishes to npm with a trusted publisher. Vendored fixtures refreshed. No API change.
+
 ## [1.5.0] - 2026-10-15
 
 ### Added
